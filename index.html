@@ -1,9 +1,9 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>鐢典即鐑璐告櫤鑳藉姪鎵?/title>
+<title>电伴热外贸智能助手</title>
 <style>
 :root {
   --bg: #f5f6f8;
@@ -20,332 +20,178 @@
   --red: #dc2626;
   --radius: 8px;
 }
-* { margin: 0; padding: 0; box-sizing: border-box; }
-body {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-  background: var(--bg);
-  color: var(--text);
-  min-height: 100vh;
-}
-.header {
-  background: var(--surface);
-  border-bottom: 1px solid var(--border);
-  padding: 16px 24px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  position: sticky;
-  top: 0;
-  z-index: 100;
-}
-.logo { display: flex; align-items: center; gap: 10px; font-size: 18px; font-weight: 600; }
-.logo-icon { width: 28px; height: 28px; background: var(--accent); border-radius: 6px; display: flex; align-items: center; justify-content: center; color: #fff; font-size: 16px; }
-.layout { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; padding: 20px; max-width: 1440px; margin: 0 auto; }
-@media (max-width: 900px) { .layout { grid-template-columns: 1fr; } }
-.card {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  padding: 20px;
-  margin-bottom: 16px;
-}
-.card-title {
-  font-size: 14px;
-  font-weight: 600;
-  color: var(--text2);
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  margin-bottom: 12px;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-}
-.inquiry-input {
-  width: 100%;
-  min-height: 180px;
-  padding: 12px;
-  border: 1px solid var(--border);
-  border-radius: 6px;
-  font-size: 14px;
-  line-height: 1.6;
-  resize: vertical;
-  font-family: inherit;
-  transition: border-color .2s;
-}
-.inquiry-input:focus { outline: none; border-color: var(--accent); }
-.btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  padding: 8px 16px;
-  border: 1px solid var(--border);
-  border-radius: 6px;
-  background: var(--surface);
-  cursor: pointer;
-  font-size: 13px;
-  font-weight: 500;
-  transition: all .15s;
-}
-.btn:hover { background: var(--bg); }
-.btn-primary { background: var(--accent); color: #fff; border-color: var(--accent); }
-.btn-primary:hover { opacity: .9; }
-.toolbar { display: flex; gap: 8px; margin-bottom: 12px; flex-wrap: wrap; }
-.param-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-@media (max-width: 600px) { .param-grid { grid-template-columns: 1fr; } }
-.param-field label {
-  display: block;
-  font-size: 12px;
-  font-weight: 500;
-  color: var(--text2);
-  margin-bottom: 3px;
-}
-.param-field input, .param-field select, .param-field textarea {
-  width: 100%;
-  padding: 7px 10px;
-  border: 1px solid var(--border);
-  border-radius: 5px;
-  font-size: 13px;
-  font-family: inherit;
-  transition: border-color .2s;
-}
-.param-field input:focus, .param-field select:focus, .param-field textarea:focus {
-  outline: none;
-  border-color: var(--accent);
-}
-.param-field textarea { min-height: 50px; resize: vertical; }
-.output-section { display: none; }
-.output-section.visible { display: block; }
-.reply-output {
-  width: 100%;
-  min-height: 300px;
-  padding: 14px;
-  border: 1px solid var(--border);
-  border-radius: 6px;
-  font-size: 13px;
-  line-height: 1.7;
-  resize: vertical;
-  font-family: inherit;
-  white-space: pre-wrap;
-  background: #fafbfc;
-}
-.section-tabs {
-  display: flex;
-  gap: 4px;
-  margin-bottom: 12px;
-  border-bottom: 1px solid var(--border);
-}
-.section-tab {
-  padding: 8px 14px;
-  font-size: 13px;
-  font-weight: 500;
-  cursor: pointer;
-  border: none;
-  background: transparent;
-  color: var(--text2);
-  border-bottom: 2px solid transparent;
-  transition: all .15s;
-}
-.section-tab:hover { color: var(--text); }
-.section-tab.active { color: var(--accent); border-bottom-color: var(--accent); }
-.param-category { margin-bottom: 16px; }
-.param-category-title {
-  font-size: 13px;
-  font-weight: 600;
-  color: var(--text);
-  margin-bottom: 8px;
-  padding-bottom: 4px;
-  border-bottom: 1px solid var(--border);
-}
-.progress-bar {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  margin-bottom: 12px;
-  font-size: 12px;
-  color: var(--text2);
-}
-.progress-track {
-  flex: 1;
-  height: 4px;
-  background: var(--border);
-  border-radius: 2px;
-  overflow: hidden;
-}
-.progress-fill {
-  height: 100%;
-  background: var(--accent);
-  border-radius: 2px;
-  transition: width .3s ease;
-}
-.quick-info {
-  display: flex;
-  gap: 8px;
-  flex-wrap: wrap;
-  margin-bottom: 12px;
-}
-.quick-info-item {
-  display: flex;
-  align-items: center;
-  gap: 4px;
-  padding: 4px 10px;
-  background: var(--accent2);
-  color: var(--accent);
-  border-radius: 20px;
-  font-size: 12px;
-  font-weight: 500;
-}
-.empty-state {
-  text-align: center;
-  padding: 40px 20px;
-  color: var(--text2);
-}
-.empty-state p { font-size: 14px; margin-top: 8px; }
-.toast {
-  position: fixed;
-  bottom: 24px;
-  left: 50%;
-  transform: translateX(-50%);
-  background: var(--text);
-  color: #fff;
-  padding: 10px 20px;
-  border-radius: 8px;
-  font-size: 13px;
-  opacity: 0;
-  transition: opacity .3s;
-  pointer-events: none;
-  z-index: 999;
-}
-.toast.show { opacity: 1; }
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;background:var(--bg);color:var(--text);min-height:100vh;}
+.header{background:var(--surface);border-bottom:1px solid var(--border);padding:16px 24px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;}
+.logo{display:flex;align-items:center;gap:10px;font-size:18px;font-weight:600;}
+.logo-icon{width:28px;height:28px;background:var(--accent);border-radius:6px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:16px;}
+.layout{display:grid;grid-template-columns:1fr 1fr;gap:20px;padding:20px;max-width:1440px;margin:0 auto;}
+@media(max-width:900px){.layout{grid-template-columns:1fr;}}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:20px;margin-bottom:16px;}
+.card-title{font-size:14px;font-weight:600;color:var(--text2);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:12px;display:flex;align-items:center;gap:6px;}
+.inquiry-input{width:100%;min-height:180px;padding:12px;border:1px solid var(--border);border-radius:6px;font-size:14px;line-height:1.6;resize:vertical;font-family:inherit;transition:border-color .2s;}
+.inquiry-input:focus{outline:none;border-color:var(--accent);}
+.btn{display:inline-flex;align-items:center;gap:6px;padding:8px 16px;border:1px solid var(--border);border-radius:6px;background:var(--surface);cursor:pointer;font-size:13px;font-weight:500;transition:all .15s;}
+.btn:hover{background:var(--bg);}
+.btn-primary{background:var(--accent);color:#fff;border-color:var(--accent);}
+.btn-primary:hover{opacity:.9;}
+.toolbar{display:flex;gap:8px;margin-bottom:12px;flex-wrap:wrap;}
+.param-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+@media(max-width:600px){.param-grid{grid-template-columns:1fr;}}
+.param-field label{display:block;font-size:12px;font-weight:500;color:var(--text2);margin-bottom:3px;}
+.param-field input,.param-field select,.param-field textarea{width:100%;padding:7px 10px;border:1px solid var(--border);border-radius:5px;font-size:13px;font-family:inherit;transition:border-color .2s;}
+.param-field input:focus,.param-field select:focus,.param-field textarea:focus{outline:none;border-color:var(--accent);}
+.param-field textarea{min-height:50px;resize:vertical;}
+.output-section{display:none;}
+.output-section.visible{display:block;}
+.reply-output{width:100%;min-height:300px;padding:14px;border:1px solid var(--border);border-radius:6px;font-size:13px;line-height:1.7;resize:vertical;font-family:inherit;white-space:pre-wrap;background:#fafbfc;}
+.section-tabs{display:flex;gap:4px;margin-bottom:12px;border-bottom:1px solid var(--border);}
+.section-tab{padding:8px 14px;font-size:13px;font-weight:500;cursor:pointer;border:none;background:transparent;color:var(--text2);border-bottom:2px solid transparent;transition:all .15s;}
+.section-tab:hover{color:var(--text);}
+.section-tab.active{color:var(--accent);border-bottom-color:var(--accent);}
+.param-category{margin-bottom:16px;}
+.progress-bar{display:flex;align-items:center;gap:8px;margin-bottom:12px;font-size:12px;color:var(--text2);}
+.progress-track{flex:1;height:4px;background:var(--border);border-radius:2px;overflow:hidden;}
+.progress-fill{height:100%;background:var(--accent);border-radius:2px;transition:width .3s ease;}
+.quick-info{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px;}
+.quick-info-item{display:flex;align-items:center;gap:4px;padding:4px 10px;background:var(--accent2);color:var(--accent);border-radius:20px;font-size:12px;font-weight:500;}
+.empty-state{text-align:center;padding:40px 20px;color:var(--text2);}
+.empty-state p{font-size:14px;margin-top:8px;}
+.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:var(--text);color:#fff;padding:10px 20px;border-radius:8px;font-size:13px;opacity:0;transition:opacity .3s;pointer-events:none;z-index:999;}
+.toast.show{opacity:1;}
 </style>
 </head>
 <body>
 <div class="header">
   <div class="logo">
-    <div class="logo-icon">鈿?/div>
-    <span>鐢典即鐑璐告櫤鑳藉姪鎵?/span>
+    <div class="logo-icon">⚡</div>
+    <span>电伴热外贸智能助手</span><span style="font-size:11px;background:#dbeafe;color:#2563eb;padding:2px 8px;border-radius:4px;margin-left:8px;font-weight:500;">基础版</span>
   </div>
   <div class="header-actions">
-    <button class="btn" onclick="resetAll()">馃棏锔?閲嶇疆</button>
-    <button class="btn btn-primary" onclick="generateReply()">鈿?鐢熸垚鍥炲</button>
+    <button class="btn" onclick="resetAll()">重置</button>
+    <button class="btn btn-primary" onclick="generateReply()">生成回复</button>
   </div>
 </div>
 <div class="layout">
-  <!-- Left -->
   <div>
     <div class="card">
-      <div class="card-title">馃摡 瀹㈡埛璇㈢洏</div>
-      <textarea id="inquiryText" class="inquiry-input" placeholder="鍦ㄦ绮樿创瀹㈡埛鐨勮嫳鏂囨垨涓枃璇㈢洏鍐呭...&#10;&#10;渚嬪锛?#10;Dear Sir,&#10;We need heating cables for pipelines. Pipe DN80, 200m, steel, maintain 80掳C, ambient -20掳C. Explosion-proof required. Please quote."></textarea>
+      <div class="card-title">客户询盘</div>
+      <textarea id="inquiryText" class="inquiry-input" placeholder="在此粘贴客户的英文或中文询盘内容...
+
+例如：
+Dear Sir,
+We need heating cables for pipelines. Pipe DN80, 200m, steel, maintain 80°C, ambient -20°C. Explosion-proof required. Please quote."></textarea>
       <div class="toolbar" style="margin-top:10px">
-        <button class="btn" onclick="parseInquiry()">馃攳 瑙ｆ瀽璇㈢洏</button>
-        <button class="btn" onclick="clearInquiry()">娓呴櫎</button>
+        <button class="btn" onclick="parseInquiry()">解析询盘</button>
+        <button class="btn" onclick="clearInquiry()">清除</button>
       </div>
     </div>
     <div class="card">
-      <div class="card-title">馃搵 鍙傛暟纭娓呭崟</div>
+      <div class="card-title">参数确认清单</div>
       <div class="progress-bar" id="progressBar">
-        <span id="progressText">瀹屾暣搴? 0%</span>
+        <span id="progressText">完整度: 0%</span>
         <div class="progress-track"><div class="progress-fill" id="progressFill" style="width:0%"></div></div>
       </div>
       <div class="section-tabs">
-        <button class="section-tab active" onclick="switchParamTab('basic',this)">鍩虹淇℃伅</button>
-        <button class="section-tab" onclick="switchParamTab('pipe',this)">绠￠亾/宸ュ喌</button>
-        <button class="section-tab" onclick="switchParamTab('temp',this)">娓╁害瑕佹眰</button>
-        <button class="section-tab" onclick="switchParamTab('electrical',this)">鐢垫皵/闃茬垎</button>
+        <button class="section-tab active" onclick="switchParamTab('basic',this)">基础信息</button>
+        <button class="section-tab" onclick="switchParamTab('pipe',this)">管道/工况</button>
+        <button class="section-tab" onclick="switchParamTab('temp',this)">温度要求</button>
+        <button class="section-tab" onclick="switchParamTab('electrical',this)">电气/防爆</button>
       </div>
       <div class="param-category" id="tab-basic">
         <div class="param-grid">
-          <div class="param-field"><label>瀹㈡埛鍚嶇О/椤圭洰</label><input type="text" id="p_customer" placeholder="濡? ABC Chemical" oninput="updateProgress()"></div>
-          <div class="param-field"><label>搴旂敤鍦烘櫙</label><input type="text" id="p_scenario" placeholder="绠￠亾淇濇俯 / 鍌ㄧ綈 / 闃€闂? oninput="updateProgress()"></div>
-          <div class="param-field"><label>绠￠亾/璁惧鏉愯川</label><input type="text" id="p_material" placeholder="纰抽挗 / 涓嶉攬閽?/ 濉戞枡" oninput="updateProgress()"></div>
-          <div class="param-field"><label>绠￠亾鍙ｅ緞 (DN)</label><input type="text" id="p_diameter" placeholder="濡? DN80 / 3 inch" oninput="updateProgress()"></div>
-          <div class="param-field"><label>绠￠亾闀垮害</label><input type="text" id="p_length" placeholder="濡? 200m" oninput="updateProgress()"></div>
-          <div class="param-field"><label>浠嬭川绫诲瀷</label><input type="text" id="p_medium" placeholder="姘?/ 娌?/ 钂告苯 / 鍖栧鍝? oninput="updateProgress()"></div>
+          <div class="param-field"><label>客户名称/项目</label><input type="text" id="p_customer" placeholder="如: ABC Chemical" oninput="updateProgress()"></div>
+          <div class="param-field"><label>应用场景</label><input type="text" id="p_scenario" placeholder="管道保温 / 储罐 / 阀门" oninput="updateProgress()"></div>
+          <div class="param-field"><label>管道/设备材质</label><input type="text" id="p_material" placeholder="碳钢 / 不锈钢 / 塑料" oninput="updateProgress()"></div>
+          <div class="param-field"><label>管道口径 (DN)</label><input type="text" id="p_diameter" placeholder="如: DN80 / 3 inch" oninput="updateProgress()"></div>
+          <div class="param-field"><label>管道长度</label><input type="text" id="p_length" placeholder="如: 200m" oninput="updateProgress()"></div>
+          <div class="param-field"><label>介质类型</label><input type="text" id="p_medium" placeholder="水 / 油 / 蒸汽 / 化学品" oninput="updateProgress()"></div>
         </div>
       </div>
       <div class="param-category" id="tab-pipe" style="display:none">
         <div class="param-grid">
-          <div class="param-field"><label>鏄惁宸叉湁淇濇俯</label><select id="p_insulation" onchange="updateProgress()"><option value="">-- 璇烽€夋嫨 --</option><option value="yes">鏄紝宸叉湁淇濇俯</option><option value="no">鍚︼紝闇€瑕侀厤濂?/option><option value="unknown">涓嶇‘瀹?/option></select></div>
-          <div class="param-field"><label>淇濇俯鏉愭枡</label><input type="text" id="p_insulation_type" placeholder="宀╂ / 鐜荤拑妫?/ 姘斿嚌鑳? oninput="updateProgress()"></div>
-          <div class="param-field"><label>淇濇俯灞傚帤搴?(mm)</label><input type="text" id="p_insulation_thickness" placeholder="濡? 50mm" oninput="updateProgress()"></div>
-          <div class="param-field"><label>瀹夎浣嶇疆</label><select id="p_location" onchange="updateProgress()"><option value="">-- 璇烽€夋嫨 --</option><option value="indoor">瀹ゅ唴</option><option value="outdoor">瀹ゅ</option><option value="underground">鍦颁笅</option><option value="hazardous">鍗遍櫓鍖哄煙</option></select></div>
-          <div class="param-field"><label>鐗规畩瑕佹眰</label><input type="text" id="p_special" placeholder="濡? 鑰愯厫铓€ / 鑰愰珮娓? oninput="updateProgress()"></div>
-          <div class="param-field"><label>鏁伴噺</label><input type="text" id="p_quantity" placeholder="濡? 500绫?/ 2濂? oninput="updateProgress()"></div>
+          <div class="param-field"><label>是否已有保温</label><select id="p_insulation" onchange="updateProgress()"><option value="">-- 请选择 --</option><option value="yes">是，已有保温</option><option value="no">否，需要配套</option><option value="unknown">不确定</option></select></div>
+          <div class="param-field"><label>保温材料</label><input type="text" id="p_insulation_type" placeholder="岩棉 / 玻璃棉 / 气凝胶" oninput="updateProgress()"></div>
+          <div class="param-field"><label>保温层厚度 (mm)</label><input type="text" id="p_insulation_thickness" placeholder="如: 50mm" oninput="updateProgress()"></div>
+          <div class="param-field"><label>安装位置</label><select id="p_location" onchange="updateProgress()"><option value="">-- 请选择 --</option><option value="indoor">室内</option><option value="outdoor">室外</option><option value="underground">地下</option><option value="hazardous">危险区域</option></select></div>
+          <div class="param-field"><label>特殊要求</label><input type="text" id="p_special" placeholder="如: 耐腐蚀 / 耐高温" oninput="updateProgress()"></div>
+          <div class="param-field"><label>数量</label><input type="text" id="p_quantity" placeholder="如: 500米 / 2套" oninput="updateProgress()"></div>
         </div>
       </div>
       <div class="param-category" id="tab-temp" style="display:none">
         <div class="param-grid">
-          <div class="param-field"><label>浠嬭川娓╁害 (掳C)</label><input type="text" id="p_medium_temp" placeholder="绠￠亾鍐呬粙璐ㄧ殑娓╁害" oninput="updateProgress()"></div>
-          <div class="param-field"><label>缁存寔娓╁害 (掳C)</label><input type="text" id="p_maintain_temp" placeholder="闇€瑕佷繚鎸佺殑娓╁害" oninput="updateProgress()"></div>
-          <div class="param-field"><label>鏈€楂樼幆澧冩俯搴?(掳C)</label><input type="text" id="p_max_ambient" placeholder="澶忓鏈€楂樻皵娓? oninput="updateProgress()"></div>
-          <div class="param-field"><label>鏈€浣庣幆澧冩俯搴?(掳C)</label><input type="text" id="p_min_ambient" placeholder="鍐鏈€浣庢皵娓? oninput="updateProgress()"></div>
-          <div class="param-field"><label>鐩爣/璁捐娓╁害 (掳C)</label><input type="text" id="p_target_temp" placeholder="瀹㈡埛瑕佹眰杈惧埌鐨勬俯搴? oninput="updateProgress()"></div>
+          <div class="param-field"><label>介质温度 (°C)</label><input type="text" id="p_medium_temp" placeholder="管道内介质的温度" oninput="updateProgress()"></div>
+          <div class="param-field"><label>维持温度 (°C)</label><input type="text" id="p_maintain_temp" placeholder="需要保持的温度" oninput="updateProgress()"></div>
+          <div class="param-field"><label>最高环境温度 (°C)</label><input type="text" id="p_max_ambient" placeholder="夏季最高气温" oninput="updateProgress()"></div>
+          <div class="param-field"><label>最低环境温度 (°C)</label><input type="text" id="p_min_ambient" placeholder="冬季最低气温" oninput="updateProgress()"></div>
+          <div class="param-field"><label>目标/设计温度 (°C)</label><input type="text" id="p_target_temp" placeholder="客户要求达到的温度" oninput="updateProgress()"></div>
         </div>
       </div>
       <div class="param-category" id="tab-electrical" style="display:none">
         <div class="param-grid">
-          <div class="param-field"><label>渚涚數鐢靛帇</label><select id="p_voltage" onchange="updateProgress()"><option value="">-- 璇烽€夋嫨 --</option><option value="110V">110V</option><option value="220V">220V</option><option value="380V">380V</option><option value="480V">480V</option><option value="custom">鍏朵粬</option></select></div>
-          <div class="param-field"><label>闃茬垎绛夌骇</label><select id="p_exproof" onchange="updateProgress()"><option value="">-- 璇烽€夋嫨 --</option><option value="none">涓嶉渶瑕?/option><option value="Exe">Ex e (澧炲畨鍨?</option><option value="Exd">Ex d (闅旂垎鍨?</option><option value="ExeIICT4">Ex e IIC T4</option><option value="ExdIICT4">Ex d IIC T4</option><option value="custom">鍏朵粬绛夌骇</option></select></div>
-          <div class="param-field"><label>闃叉姢绛夌骇 (IP)</label><select id="p_ip" onchange="updateProgress()"><option value="">-- 璇烽€夋嫨 --</option><option value="IP54">IP54</option><option value="IP65">IP65</option><option value="IP66">IP66</option><option value="IP67">IP67</option><option value="IP68">IP68</option></select></div>
-          <div class="param-field"><label>鎵€闇€璁よ瘉</label><input type="text" id="p_cert" placeholder="濡? ATEX / IECEx / UL / CCC" oninput="updateProgress()"></div>
-          <div class="param-field" style="grid-column: span 2;"><label>鐩殑鍦板浗瀹?/label><input type="text" id="p_country" placeholder="濡? Saudi Arabia, Russia, Vietnam..." oninput="updateProgress()"></div>
+          <div class="param-field"><label>供电电压</label><select id="p_voltage" onchange="updateProgress()"><option value="">-- 请选择 --</option><option value="110V">110V</option><option value="220V">220V</option><option value="380V">380V</option><option value="480V">480V</option><option value="custom">其他</option></select></div>
+          <div class="param-field"><label>防爆等级</label><select id="p_exproof" onchange="updateProgress()"><option value="">-- 请选择 --</option><option value="none">不需要</option><option value="Exe">Ex e (增安型)</option><option value="Exd">Ex d (隔爆型)</option><option value="ExeIICT4">Ex e IIC T4</option><option value="ExdIICT4">Ex d IIC T4</option><option value="custom">其他等级</option></select></div>
+          <div class="param-field"><label>防护等级 (IP)</label><select id="p_ip" onchange="updateProgress()"><option value="">-- 请选择 --</option><option value="IP54">IP54</option><option value="IP65">IP65</option><option value="IP66">IP66</option><option value="IP67">IP67</option><option value="IP68">IP68</option></select></div>
+          <div class="param-field"><label>所需认证</label><input type="text" id="p_cert" placeholder="如: ATEX / IECEx / UL / CCC" oninput="updateProgress()"></div>
+          <div class="param-field" style="grid-column: span 2;"><label>目的地国家</label><input type="text" id="p_country" placeholder="如: Saudi Arabia, Russia, Vietnam..." oninput="updateProgress()"></div>
         </div>
       </div>
     </div>
   </div>
-      <div class="card" style="background:linear-gradient(135deg,#fef3c7,#fffbeb);border-color:#fbbf24;">
-      <div class="card-title" style="color:#92400e;">⭐ PRO 版功能预告</div>
-      <div style="font-size:13px;line-height:1.7;color:#78350f;">
-        <p style="margin-bottom:8px;"><strong>PRO 版（¥19）即将上线，额外包含：</strong></p>
-        <ul style="margin:0 0 8px 16px;padding:0;">
-          <li>热损计算器 — 输入管径/温度/保温厚度，自动算推荐功率和型号</li>
-          <li>出口合规速查 — 选目的国，自动提示认证要求和进口注意事项</li>
-          <li>数据持久化 — 保存客户档案和历史询盘</li>
-        </ul>
-        <p style="color:#92400e;font-size:12px;">💡 免费版已包含完整询盘处理功能，可长期使用</p>
-      </div>
+  <div class="card" style="background:linear-gradient(135deg,#fef3c7,#fffbeb);border-color:#fbbf24;">
+    <div class="card-title" style="color:#92400e;">⭐ PRO 版功能预告</div>
+    <div style="font-size:13px;line-height:1.7;color:#78350f;">
+      <p style="margin-bottom:8px;"><strong>PRO 版（¥19）即将上线，额外包含：</strong></p>
+      <ul style="margin:0 0 8px 16px;padding:0;">
+        <li>热损计算器 - 输入管径/温度/保温厚度，自动算推荐功率和型号</li>
+        <li>出口合规速查 - 选目的国，自动提示认证要求和进口注意事项</li>
+        <li>数据持久化 - 保存客户档案和历史询盘</li>
+      </ul>
+      <p style="color:#92400e;font-size:12px;">U0001f4a1 免费版已包含完整询盘处理功能，可长期使用</p>
     </div>
-  <!-- Right -->
+  </div>
   <div>
     <div class="card">
-      <div class="card-title">馃摑 鐢熸垚鐨勫洖澶?/div>
+      <div class="card-title">生成的回复</div>
       <div id="emptyState" class="empty-state">
-        <div style="font-size: 40px; margin-bottom: 8px;">馃搵</div>
-        <p>濉啓宸︿晶鍙傛暟鍚庣偣鍑汇€岀敓鎴愬洖澶嶃€?/p>
-        <p style="font-size: 12px; margin-top: 4px;">涔熷彲浠ュ厛绮樿创璇㈢洏锛岀偣鍑汇€岃В鏋愯鐩樸€嶈嚜鍔ㄥ～鍙傛暟</p>
+        <div style="font-size:40px;margin-bottom:8px;">U0001f4cb</div>
+        <p>填写左侧参数后点击「生成回复」</p>
+        <p style="font-size:12px;margin-top:4px;">也可以先粘贴询盘，点击「解析询盘」自动填参数</p>
       </div>
       <div id="outputSection" class="output-section">
         <div class="quick-info" id="quickInfo"></div>
         <div class="section-tabs">
-          <button class="section-tab active" onclick="switchReplyTab('english',this)">馃摟 鑻辨枃鍥炲</button>
-          <button class="section-tab" onclick="switchReplyTab('chinese',this)">馃搫 涓枃鍐呴儴澶囨敞</button>
-          <button class="section-tab" onclick="switchReplyTab('questions',this)">鉂?寰呯‘璁ら棶棰?/button>
+          <button class="section-tab active" onclick="switchReplyTab('english',this)">英文回复</button>
+          <button class="section-tab" onclick="switchReplyTab('chinese',this)">中文内部备注</button>
+          <button class="section-tab" onclick="switchReplyTab('questions',this)">待确认问题</button>
         </div>
         <div id="reply-english" style="display:block"><textarea id="englishReply" class="reply-output" readonly></textarea></div>
         <div id="reply-chinese" style="display:none"><textarea id="chineseReply" class="reply-output" readonly></textarea></div>
         <div id="reply-questions" style="display:none"><textarea id="questionsList" class="reply-output" readonly></textarea></div>
         <div class="toolbar" style="margin-top:10px">
-          <button class="btn" onclick="copyCurrentReply()">馃搵 澶嶅埗</button>
-          <button class="btn" onclick="copyAll()">馃搵 澶嶅埗鍏ㄩ儴</button>
+          <button class="btn" onclick="copyCurrentReply()">复制</button>
+          <button class="btn" onclick="copyAll()">复制全部</button>
         </div>
       </div>
     </div>
     <div class="card">
-      <div class="card-title">馃攲 浜у搧閫夊瀷鍙傝€?/div>
-      <div style="font-size: 13px; line-height: 1.7; color: var(--text2);">
-        <table style="width:100%; border-collapse: collapse; font-size: 12px;">
-          <thead><tr style="border-bottom: 1px solid var(--border);"><th style="text-align:left;padding:6px 4px;">浜у搧绫诲瀷</th><th style="text-align:left;padding:6px 4px;">閫傜敤鍦烘櫙</th><th style="text-align:left;padding:6px 4px;">娓╁害鑼冨洿</th></tr></thead>
+      <div class="card-title">产品选型参考</div>
+      <div style="font-size:13px;line-height:1.7;color:var(--text2);">
+        <table style="width:100%;border-collapse:collapse;font-size:12px;">
+          <thead><tr style="border-bottom:1px solid var(--border);"><th style="text-align:left;padding:6px 4px;">产品类型</th><th style="text-align:left;padding:6px 4px;">适用场景</th><th style="text-align:left;padding:6px 4px;">温度范围</th></tr></thead>
           <tbody>
-            <tr style="border-bottom:1px solid var(--border);"><td style="padding:6px 4px;font-weight:500;">鑷檺娓?(PTC)</td><td style="padding:6px 4px;">绠￠亾淇濇俯銆佸皬鍙ｅ緞銆佹櫘閫氶槻鍐?/td><td style="padding:6px 4px;">鈮?65掳C (缁存寔)</td></tr>
-            <tr style="border-bottom:1px solid var(--border);"><td style="padding:6px 4px;font-weight:500;">骞惰仈鎭掑姛鐜?/td><td style="padding:6px 4px;">闀跨绾裤€佸伐鑹轰繚娓┿€佷腑娓?/td><td style="padding:6px 4px;">鈮?120掳C (缁存寔)</td></tr>
-            <tr style="border-bottom:1px solid var(--border);"><td style="padding:6px 4px;font-weight:500;">涓茶仈鎭掑姛鐜?/td><td style="padding:6px 4px;">瓒呴暱绠＄嚎銆侀珮娓┿€侀珮鍔熺巼</td><td style="padding:6px 4px;">鈮?260掳C (缁存寔)</td></tr>
-            <tr><td style="padding:6px 4px;font-weight:500;">MI 鐭跨墿缁濈紭</td><td style="padding:6px 4px;">瓒呴珮娓┿€佹牳绾с€佹瀬绔幆澧?/td><td style="padding:6px 4px;">鈮?593掳C (缁存寔)</td></tr>
+            <tr style="border-bottom:1px solid var(--border);"><td style="padding:6px 4px;font-weight:500;">自限温 (PTC)</td><td style="padding:6px 4px;">管道保温、小口径、普通防冻</td><td style="padding:6px 4px;">≤ 65°C (维持)</td></tr>
+            <tr style="border-bottom:1px solid var(--border);"><td style="padding:6px 4px;font-weight:500;">并联恒功率</td><td style="padding:6px 4px;">长管线、工艺保温、中温</td><td style="padding:6px 4px;">≤ 120°C (维持)</td></tr>
+            <tr style="border-bottom:1px solid var(--border);"><td style="padding:6px 4px;font-weight:500;">串联恒功率</td><td style="padding:6px 4px;">超长管线、高温、高功率</td><td style="padding:6px 4px;">≤ 260°C (维持)</td></tr>
+            <tr><td style="padding:6px 4px;font-weight:500;">MI 矿物绝缘</td><td style="padding:6px 4px;">超高温、核级、极端环境</td><td style="padding:6px 4px;">≤ 593°C (维持)</td></tr>
           </tbody>
         </table>
       </div>
     </div>
   </div>
 </div>
-<div class="toast" id="toast"></div>
+</body>
+</html>
 <script>
 function switchParamTab(tabId, btn) {
   document.querySelectorAll('.section-tab').forEach(t => t.classList.remove('active'));
@@ -361,52 +207,44 @@ function switchReplyTab(tabId, btn) {
     document.getElementById('reply-' + id).style.display = (id === tabId) ? 'block' : 'none';
   });
 }
-const PARAM_IDS = [
-  'p_customer','p_scenario','p_material','p_diameter','p_length','p_medium',
-  'p_insulation','p_insulation_type','p_insulation_thickness','p_location','p_special','p_quantity',
-  'p_medium_temp','p_maintain_temp','p_max_ambient','p_min_ambient','p_target_temp',
-  'p_voltage','p_exproof','p_ip','p_cert','p_country'
-];
+var PARAM_IDS = ['p_customer','p_scenario','p_material','p_diameter','p_length','p_medium','p_insulation','p_insulation_type','p_insulation_thickness','p_location','p_special','p_quantity','p_medium_temp','p_maintain_temp','p_max_ambient','p_min_ambient','p_target_temp','p_voltage','p_exproof','p_ip','p_cert','p_country'];
 function updateProgress() {
-  let filled = 0;
-  PARAM_IDS.forEach(id => {
-    const el = document.getElementById(id);
-    if (el && el.value && el.value.trim()) filled++;
-  });
-  const pct = Math.round((filled / PARAM_IDS.length) * 100);
+  var filled = 0;
+  PARAM_IDS.forEach(function(id) { var el = document.getElementById(id); if (el && el.value && el.value.trim()) filled++; });
+  var pct = Math.round((filled / PARAM_IDS.length) * 100);
   document.getElementById('progressFill').style.width = pct + '%';
-  document.getElementById('progressText').textContent = `瀹屾暣搴? ${pct}% (${filled}/${PARAM_IDS.length})`;
+  document.getElementById('progressText').textContent = '完整度: ' + pct + '% (' + filled + '/' + PARAM_IDS.length + ')';
 }
 function parseInquiry() {
-  const text = document.getElementById('inquiryText').value;
-  if (!text.trim()) return showToast('璇峰厛绮樿创璇㈢洏鍐呭');
-  const mappings = [
+  var text = document.getElementById('inquiryText').value;
+  if (!text.trim()) return showToast('请先粘贴询盘内容');
+  var mappings = [
     { id:'p_customer', patterns:[/dear\s+(\w+)/i, /hello\s+(\w+)/i, /attn[:\s]+(\w+)/i, /to[:\s]+(\w+)/i] },
-    { id:'p_material', patterns:[/(carbon\s*steel|stainless\s*steel|cs|ss|steel|閾渱涓嶉攬閽纰抽挗|濉戞枡|PVC)/i] },
-    { id:'p_diameter', patterns:[/(dn\d{2,3})/i, /(\d{1,3})\s*(inch|inches|")/i, /鍙ｅ緞[锛?]\s*(\d+)/, /鍏О鐩村緞[锛?]\s*(\d+)/] },
-    { id:'p_length', patterns:[/(\d+[\d,.]*)\s*(m|meters?|绫硘km)/i] },
-    { id:'p_medium', patterns:[/(water|oil|steam|chemical|gas|姘磡娌箌钂告苯|鍖栧鍝亅澶╃劧姘攟姹℃按)/i] },
-    { id:'p_maintain_temp', patterns:[/(maintain|maintenance|淇濇寔|缁存寔)\s*(?:temp|temperature|娓╁害)?[锛?\s]*(\d+)/i, /(\d+)\s*掳[cC]\s*(?:maintain|淇濇寔|缁存寔)/i] },
-    { id:'p_max_ambient', patterns:[/(?:max|鏈€楂榺maximum)\s*(?:ambient|鐜|姘旀俯)[锛?\s]*(\d+)/i] },
-    { id:'p_min_ambient', patterns:[/(?:min|鏈€浣巪minimum)\s*(?:ambient|鐜|姘旀俯)[锛?\s]*(\d+)/i, /(?:ambient|鐜)\s*(?:temp|temperature|娓╁害)[锛?\s]*(-?\d+)/i] },
-    { id:'p_target_temp', patterns:[/(?:target|design|璁捐|鐩爣)\s*(?:temp|temperature|娓╁害)?[锛?\s]*(\d+)/i, /杈惧埌\s*(\d+)\s*搴?i] },
-    { id:'p_medium_temp', patterns:[/(?:medium|浠嬭川|media|process)\s*(?:temp|temperature|娓╁害)?[锛?\s]*(\d+)/i] },
-    { id:'p_exproof', patterns:[/(?:explosion.proof|闃茬垎|EX|ex)\s*(?:class|绛夌骇)?[锛?\s]*(\w+)/i, /Ex\s*[ed]/i] },
-    { id:'p_voltage', patterns:[/(\d{3})\s*V/i, /voltage[锛?\s]*(\d+)/i, /鐢靛帇[锛?\s]*(\d+)/i] },
-    { id:'p_country', patterns:[/(?:ship|deliver|destination|send|to|鐩殑鍦皘杩愬線|鍑哄彛)[锛?\s]*(\w+\s*\w*)/i, /for\s+(\w+\s*\w*)\s+project/i] },
-    { id:'p_scenario', patterns:[/(?:for|application|鐢ㄩ€攟鍦烘櫙|搴旂敤)[锛?\s]*([^銆俓n]+)/i, /(pipeline|pipe|tank|valve|绠￠亾|鍌ㄧ綈|闃€闂▅绠＄嚎)/i] },
-    { id:'p_insulation', patterns:[/(?:insulation|淇濇俯|insulated)/i] },
-    { id:'p_quantity', patterns:[/(\d+[\d,.]*)\s*(?:km|m|meters?|绫硘濂梶鏍箌鍗穦鏉?/i] },
+    { id:'p_material', patterns:[/(carbon\s*steel|stainless\s*steel|cs|ss|steel|铜|不锈钢|碳钢|塑料|PVC)/i] },
+    { id:'p_diameter', patterns:[/(dn\d{2,3})/i, /(\d{1,3})\s*(inch|inches|")/i, /口径[：:]\s*(\d+)/, /公称直径[：:]\s*(\d+)/] },
+    { id:'p_length', patterns:[/(\d+[\d,.]*)\s*(m|meters?|米|km)/i] },
+    { id:'p_medium', patterns:[/(water|oil|steam|chemical|gas|水|油|蒸汽|化学品|天然气|污水)/i] },
+    { id:'p_maintain_temp', patterns:[/(maintain|maintenance|保持|维持)\s*(?:temp|temperature|温度)?[：:\s]*(\d+)/i, /(\d+)\s*°[cC]\s*(?:maintain|保持|维持)/i] },
+    { id:'p_max_ambient', patterns:[/(?:max|最高|maximum)\s*(?:ambient|环境|气温)[：:\s]*(\d+)/i] },
+    { id:'p_min_ambient', patterns:[/(?:min|最低|minimum)\s*(?:ambient|环境|气温)[：:\s]*(\d+)/i, /(?:ambient|环境)\s*(?:temp|temperature|温度)[：:\s]*(-?\d+)/i] },
+    { id:'p_target_temp', patterns:[/(?:target|design|设计|目标)\s*(?:temp|temperature|温度)?[：:\s]*(\d+)/i, /达到\s*(\d+)\s*度/i] },
+    { id:'p_medium_temp', patterns:[/(?:medium|介质|media|process)\s*(?:temp|temperature|温度)?[：:\s]*(\d+)/i] },
+    { id:'p_exproof', patterns:[/(?:explosion.proof|防爆|EX|ex)\s*(?:class|等级)?[：:\s]*(\w+)/i, /Ex\s*[ed]/i] },
+    { id:'p_voltage', patterns:[/(\d{3})\s*V/i, /voltage[：:\s]*(\d+)/i, /电压[：:\s]*(\d+)/i] },
+    { id:'p_country', patterns:[/(?:ship|deliver|destination|send|to|目的地|运往|出口)[：:\s]*(\w+\s*\w*)/i, /for\s+(\w+\s*\w*)\s+project/i] },
+    { id:'p_scenario', patterns:[/(?:for|application|用途|场景|应用)[：:\s]*([^。\n]+)/i, /(pipeline|pipe|tank|valve|管道|储罐|阀门|管线)/i] },
+    { id:'p_insulation', patterns:[/(?:insulation|保温|insulated)/i] },
+    { id:'p_quantity', patterns:[/(\d+[\d,.]*)\s*(?:km|m|meters?|米|套|根|卷|条)/i] },
     { id:'p_cert', patterns:[/(ATEX|IECEx|UL|CSA|CCC|CE|EAC)/i] },
   ];
-  let filled = 0;
-  mappings.forEach(m => {
-    const el = document.getElementById(m.id);
+  var filled = 0;
+  mappings.forEach(function(m) {
+    var el = document.getElementById(m.id);
     if (!el || (el.value && el.value.trim())) return;
-    for (const pat of m.patterns) {
-      const match = text.match(pat);
+    for (var pi = 0; pi < m.patterns.length; pi++) {
+      var match = text.match(m.patterns[pi]);
       if (match) {
-        let val = match[1] || match[0];
+        var val = match[1] || match[0];
         if (val.length > 30) val = val.substring(0,30);
         el.value = val;
         filled++;
@@ -414,126 +252,130 @@ function parseInquiry() {
       }
     }
   });
-  const insEl = document.getElementById('p_insulation');
-  if (insEl && insEl.value === '' && /insulation|淇濇俯/i.test(text)) { insEl.value = 'yes'; }
+  var insEl = document.getElementById('p_insulation');
+  if (insEl && insEl.value === '' && /insulation|保温/i.test(text)) { insEl.value = 'yes'; }
   updateProgress();
-  showToast(`瑙ｆ瀽瀹屾垚锛岃嚜鍔ㄥ～鍏呬簡 ${filled} 涓弬鏁癭);
+  showToast('解析完成，自动填充了 ' + filled + ' 个参数');
 }
 function generateReply() {
-  const params = {};
-  PARAM_IDS.forEach(id => { const el = document.getElementById(id); params[id] = el ? el.value.trim() : ''; });
-  const hasAny = PARAM_IDS.some(id => params[id]);
-  if (!hasAny) return showToast('璇峰厛濉啓鍙傛暟鎴栫矘璐磋鐩?);
-  let eng = params.p_customer ? `Dear ${params.p_customer},\n\n` : `Dear Sir/Madam,\n\n`;
-  eng += `Thank you for your inquiry regarding electric heat tracing solutions. We are pleased to provide the following preliminary proposal based on the information provided.\n\n`;
-  eng += `--- Preliminary Proposal ---\n\n`;
-  eng += `Application: ${params.p_scenario || 'Pipe/Tank heat tracing'}\n`;
-  if(params.p_material) eng += `Material: ${params.p_material}\n`;
-  if(params.p_diameter) eng += `Pipe Diameter: ${params.p_diameter}\n`;
-  if(params.p_length) eng += `Pipe Length: ${params.p_length}\n`;
-  if(params.p_medium) eng += `Medium: ${params.p_medium}\n`;
-  if(params.p_maintain_temp) eng += `Maintain Temperature: ${params.p_maintain_temp}掳C\n`;
-  if(params.p_target_temp) eng += `Target Temperature: ${params.p_target_temp}掳C\n`;
-  if(params.p_medium_temp) eng += `Medium Temperature: ${params.p_medium_temp}掳C\n`;
-  if(params.p_min_ambient) eng += `Min. Ambient Temperature: ${params.p_min_ambient}掳C\n`;
-  if(params.p_max_ambient) eng += `Max. Ambient Temperature: ${params.p_max_ambient}掳C\n`;
-  if(params.p_voltage) eng += `Supply Voltage: ${params.p_voltage}\n`;
-  if(params.p_exproof && params.p_exproof!=='none') eng += `Explosion-proof Class: ${params.p_exproof}\n`;
-  if(params.p_ip) eng += `Protection Class: ${params.p_ip}\n`;
-  if(params.p_cert) eng += `Required Certification: ${params.p_cert}\n`;
-  if(params.p_quantity) eng += `Estimated Quantity: ${params.p_quantity}\n`;
-  let rec = '\nRecommended Product Type: ';
-  const mt = parseInt(params.p_maintain_temp);
+  var params = {};
+  PARAM_IDS.forEach(function(id) { var el = document.getElementById(id); params[id] = el ? el.value.trim() : ''; });
+  var hasAny = PARAM_IDS.some(function(id) { return params[id]; });
+  if (!hasAny) return showToast('请先填写参数或粘贴询盘');
+  var eng = params.p_customer ? 'Dear ' + params.p_customer + ',\n\n' : 'Dear Sir/Madam,\n\n';
+  eng += 'Thank you for your inquiry regarding electric heat tracing solutions. We are pleased to provide the following preliminary proposal based on the information provided.\n\n';
+  eng += '--- Preliminary Proposal ---\n\n';
+  eng += 'Application: ' + (params.p_scenario || 'Pipe/Tank heat tracing') + '\n';
+  if(params.p_material) eng += 'Material: ' + params.p_material + '\n';
+  if(params.p_diameter) eng += 'Pipe Diameter: ' + params.p_diameter + '\n';
+  if(params.p_length) eng += 'Pipe Length: ' + params.p_length + '\n';
+  if(params.p_medium) eng += 'Medium: ' + params.p_medium + '\n';
+  if(params.p_maintain_temp) eng += 'Maintain Temperature: ' + params.p_maintain_temp + '°C\n';
+  if(params.p_target_temp) eng += 'Target Temperature: ' + params.p_target_temp + '°C\n';
+  if(params.p_medium_temp) eng += 'Medium Temperature: ' + params.p_medium_temp + '°C\n';
+  if(params.p_min_ambient) eng += 'Min. Ambient Temperature: ' + params.p_min_ambient + '°C\n';
+  if(params.p_max_ambient) eng += 'Max. Ambient Temperature: ' + params.p_max_ambient + '°C\n';
+  if(params.p_voltage) eng += 'Supply Voltage: ' + params.p_voltage + '\n';
+  if(params.p_exproof && params.p_exproof!=='none') eng += 'Explosion-proof Class: ' + params.p_exproof + '\n';
+  if(params.p_ip) eng += 'Protection Class: ' + params.p_ip + '\n';
+  if(params.p_cert) eng += 'Required Certification: ' + params.p_cert + '\n';
+  if(params.p_quantity) eng += 'Estimated Quantity: ' + params.p_quantity + '\n';
+  var rec = '\nRecommended Product Type: ';
+  var mt = parseInt(params.p_maintain_temp);
   if(mt && mt>200) rec+='MI Mineral Insulated Cable';
-  else if(mt && mt>100) rec+='Series Constant Power (涓茶仈鎭掑姛鐜?';
-  else rec+='Self-Regulating (鑷檺娓? / Parallel Constant Power (骞惰仈鎭掑姛鐜?';
+  else if(mt && mt>100) rec+='Series Constant Power (串联恒功率)';
+  else rec+='Self-Regulating (自限温) / Parallel Constant Power (并联恒功率)';
   rec += '\n\n*Detailed selection and heat loss calculation will be provided upon confirmation of all parameters.*\n';
   eng += rec;
-  eng += `\n--- Next Steps ---\n\n`;
-  eng += `1. Please confirm the above parameters are correct\n`;
-  eng += `2. We will provide detailed technical proposal and quotation\n`;
-  eng += `3. Heat loss calculation & product specification sheet to follow\n\n`;
-  if(params.p_country) eng += `Regarding shipment to ${params.p_country}, we will check import regulations and required certifications simultaneously.\n\n`;
-  eng += `Looking forward to your feedback.\n\nBest regards,\n[Your Name]\n[Company Name]`;
+  eng += '\n--- Next Steps ---\n\n';
+  eng += '1. Please confirm the above parameters are correct\n';
+  eng += '2. We will provide detailed technical proposal and quotation\n';
+  eng += '3. Heat loss calculation & product specification sheet to follow\n\n';
+  if(params.p_country) eng += 'Regarding shipment to ' + params.p_country + ', we will check import regulations and required certifications simultaneously.\n\n';
+  eng += 'Looking forward to your feedback.\n\nBest regards,\n[Your Name]\n[Company Name]';
   document.getElementById('englishReply').value = eng;
-  let cn = '===== 瀹㈡埛淇℃伅 =====\n';
-  cn += `瀹㈡埛/椤圭洰: ${params.p_customer||'寰呯‘璁?}\n搴旂敤鍦烘櫙: ${params.p_scenario||'寰呯‘璁?}\n鐩殑鍦? ${params.p_country||'寰呯‘璁?}\n\n`;
-  cn += '===== 鎶€鏈弬鏁?=====\n';
-  cn += `鏉愯川: ${params.p_material||'寰呯‘璁?}\n鍙ｅ緞: ${params.p_diameter||'寰呯‘璁?}\n闀垮害: ${params.p_length||'寰呯‘璁?}\n浠嬭川: ${params.p_medium||'寰呯‘璁?}\n`;
-  cn += `浠嬭川娓╁害: ${params.p_medium_temp||'寰呯‘璁?}掳C\n缁存寔娓╁害: ${params.p_maintain_temp||'寰呯‘璁?}掳C\n鐩爣娓╁害: ${params.p_target_temp||'寰呯‘璁?}掳C\n`;
-  cn += `鏈€楂樼幆澧冩俯搴? ${params.p_max_ambient||'寰呯‘璁?}掳C\n鏈€浣庣幆澧冩俯搴? ${params.p_min_ambient||'寰呯‘璁?}掳C\n`;
-  cn += `鐢靛帇: ${params.p_voltage||'寰呯‘璁?}\n闃茬垎: ${params.p_exproof?(params.p_exproof==='none'?'涓嶉渶瑕?:params.p_exproof):'寰呯‘璁?}\n闃叉姢: ${params.p_ip||'寰呯‘璁?}\n璁よ瘉: ${params.p_cert||'寰呯‘璁?}\n\n`;
-  cn += '===== 浜у搧 & 鐗╂祦 =====\n';
-  cn += `鏁伴噺: ${params.p_quantity||'寰呯‘璁?}\n淇濇俯: ${params.p_insulation==='yes'?'宸叉湁':params.p_insulation==='no'?'闇€閰嶅':'寰呯‘璁?}\n淇濇俯鏉愭枡: ${params.p_insulation_type||'寰呯‘璁?}\n淇濇俯鍘氬害: ${params.p_insulation_thickness||'寰呯‘璁?}\n`;
-  cn += `鐗规畩瑕佹眰: ${params.p_special||'鏃?}\n瀹夎浣嶇疆: ${params.p_location||'寰呯‘璁?}\n\n`;
-  cn += '===== 鍚庣画鎿嶄綔娓呭崟 =====\n';
-  cn += `鈽?绛夊緟瀹㈡埛纭鍙傛暟\n鈽?鐑崯璁＄畻\n鈽?浜у搧閫夊瀷 & 鎶ヤ环\n鈽?鏌ヨ ${params.p_country||'鐩殑鍦?} 杩涘彛鏀跨瓥/璁よ瘉瑕佹眰\n鈽?纭畾璐ф湡\n鈽?褰㈠紡鍙戠エ & 浠樻鏂瑰紡\n`;
+  var cn = '===== 客户信息 =====\n';
+  cn += '客户/项目: ' + (params.p_customer||'待确认') + '\n应用场景: ' + (params.p_scenario||'待确认') + '\n目的地: ' + (params.p_country||'待确认') + '\n\n';
+  cn += '===== 技术参数 =====\n';
+  cn += '材质: ' + (params.p_material||'待确认') + '\n口径: ' + (params.p_diameter||'待确认') + '\n长度: ' + (params.p_length||'待确认') + '\n介质: ' + (params.p_medium||'待确认') + '\n';
+  cn += '介质温度: ' + (params.p_medium_temp||'待确认') + '°C\n维持温度: ' + (params.p_maintain_temp||'待确认') + '°C\n目标温度: ' + (params.p_target_temp||'待确认') + '°C\n';
+  cn += '最高环境温度: ' + (params.p_max_ambient||'待确认') + '°C\n最低环境温度: ' + (params.p_min_ambient||'待确认') + '°C\n';
+  cn += '电压: ' + (params.p_voltage||'待确认') + '\n防爆: ' + (params.p_exproof?(params.p_exproof==='none'?'不需要':params.p_exproof):'待确认') + '\n防护: ' + (params.p_ip||'待确认') + '\n认证: ' + (params.p_cert||'待确认') + '\n\n';
+  cn += '===== 产品 & 物流 =====\n';
+  cn += '数量: ' + (params.p_quantity||'待确认') + '\n保温: ' + (params.p_insulation==='yes'?'已有':params.p_insulation==='no'?'需配套':'待确认') + '\n保温材料: ' + (params.p_insulation_type||'待确认') + '\n保温厚度: ' + (params.p_insulation_thickness||'待确认') + '\n';
+  cn += '特殊要求: ' + (params.p_special||'无') + '\n安装位置: ' + (params.p_location||'待确认') + '\n\n';
+  cn += '===== 后续操作清单 =====\n';
+  cn += '☐ 等待客户确认参数\n☐ 热损计算\n☐ 产品选型 & 报价\n☐ 查询 ' + (params.p_country||'目的地') + ' 进口政策/认证要求\n☐ 确定货期\n☐ 形式发票 & 付款方式\n';
   document.getElementById('chineseReply').value = cn;
-  let questions = '';
-  const missing = [];
-  if(!params.p_material) missing.push('绠￠亾/璁惧鏉愯川 (纰抽挗/涓嶉攬閽?)');
-  if(!params.p_diameter) missing.push('绠￠亾鍙ｅ緞');
-  if(!params.p_length) missing.push('绠￠亾/浼寸儹闀垮害');
-  if(!params.p_medium) missing.push('浠嬭川绫诲瀷');
-  if(!params.p_maintain_temp) missing.push('缁存寔娓╁害');
-  if(!params.p_min_ambient) missing.push('鏈€浣庣幆澧冩俯搴?);
-  if(!params.p_voltage) missing.push('渚涚數鐢靛帇');
-  if(!params.p_insulation||params.p_insulation==='') missing.push('鏄惁鏈変繚娓? 鏉愭枡鍜屽帤搴?');
-  if(!params.p_country) missing.push('鐩殑鍦板浗瀹?娓彛');
-  if(!params.p_exproof||params.p_exproof==='') missing.push('鏄惁闇€瑕侀槻鐖? 绛夌骇瑕佹眰?');
-  if(!params.p_quantity) missing.push('澶ц嚧鏁伴噺');
-  if(!params.p_medium_temp) missing.push('浠嬭川娓╁害');
-  if(!params.p_target_temp&&!params.p_maintain_temp) missing.push('闇€瑕佽揪鍒扮殑鐩爣/缁存寔娓╁害');
-  questions += missing.length ? '浠ヤ笅鍙傛暟闇€瑕佸悜瀹㈡埛纭:\n\n'+missing.map((q,i)=>`${i+1}. ${q}`).join('\n') : '涓昏鍙傛暟宸查綈鍏紝鍙互鐩存帴杩涜鏂规璁捐鍜屾姤浠枫€?;
-  questions += '\n\n===== 闇€鍚屾鏌ヨ =====\n';
-  if(params.p_country) { questions += `鈽?${params.p_country} 杩涘彛鏀跨瓥 & 鍏崇◣\n鈽?${params.p_country} 鐩稿叧琛屼笟璁よ瘉瑕佹眰\n鈽?鏄惁闇€瑕佸綋鍦颁唬鐞?缈昏瘧鏂囦欢\n`; }
+  var questions = '';
+  var missing = [];
+  if(!params.p_material) missing.push('管道/设备材质 (碳钢/不锈钢?)');
+  if(!params.p_diameter) missing.push('管道口径');
+  if(!params.p_length) missing.push('管道/伴热长度');
+  if(!params.p_medium) missing.push('介质类型');
+  if(!params.p_maintain_temp) missing.push('维持温度');
+  if(!params.p_min_ambient) missing.push('最低环境温度');
+  if(!params.p_voltage) missing.push('供电电压');
+  if(!params.p_insulation||params.p_insulation==='') missing.push('是否有保温? 材料和厚度?');
+  if(!params.p_country) missing.push('目的地国家/港口');
+  if(!params.p_exproof||params.p_exproof==='') missing.push('是否需要防爆? 等级要求?');
+  if(!params.p_quantity) missing.push('大致数量');
+  if(!params.p_medium_temp) missing.push('介质温度');
+  if(!params.p_target_temp&&!params.p_maintain_temp) missing.push('需要达到的目标/维持温度');
+  if (missing.length) {
+    questions += '以下参数需要向客户确认:\n\n';
+    for(var qi=0; qi<missing.length; qi++) questions += (qi+1) + '. ' + missing[qi] + '\n';
+  } else {
+    questions += '主要参数已齐全，可以直接进行方案设计和报价。';
+  }
+  questions += '\n\n===== 需同步查询 =====\n';
+  if(params.p_country) { questions += '☐ ' + params.p_country + ' 进口政策 & 关税\n☐ ' + params.p_country + ' 相关行业认证要求\n☐ 是否需要当地代理/翻译文件\n'; }
   document.getElementById('questionsList').value = questions;
   document.getElementById('emptyState').style.display = 'none';
   document.getElementById('outputSection').classList.add('visible');
-  const qInfo = document.getElementById('quickInfo');
+  var qInfo = document.getElementById('quickInfo');
   qInfo.innerHTML = '';
-  if(params.p_customer) qInfo.innerHTML += `<span class="quick-info-item">馃彚 ${params.p_customer}</span>`;
-  if(params.p_maintain_temp) qInfo.innerHTML += `<span class="quick-info-item">馃尅锔?缁存寔 ${params.p_maintain_temp}掳C</span>`;
-  if(params.p_length) qInfo.innerHTML += `<span class="quick-info-item">馃搹 ${params.p_length}</span>`;
-  if(params.p_country) qInfo.innerHTML += `<span class="quick-info-item">馃實 ${params.p_country}</span>`;
-  if(params.p_exproof&&params.p_exproof!=='none'&&params.p_exproof!=='') qInfo.innerHTML += `<span class="quick-info-item">馃敀 ${params.p_exproof}</span>`;
-  showToast('鍥炲宸茬敓鎴?);
+  if(params.p_customer) qInfo.innerHTML += '<span class="quick-info-item">🏢 ' + params.p_customer + '</span>';
+  if(params.p_maintain_temp) qInfo.innerHTML += '<span class="quick-info-item">🌡️ 维持 ' + params.p_maintain_temp + '°C</span>';
+  if(params.p_length) qInfo.innerHTML += '<span class="quick-info-item">📏 ' + params.p_length + '</span>';
+  if(params.p_country) qInfo.innerHTML += '<span class="quick-info-item">🌍 ' + params.p_country + '</span>';
+  if(params.p_exproof&&params.p_exproof!=='none'&&params.p_exproof!=='') qInfo.innerHTML += '<span class="quick-info-item">🔒 ' + params.p_exproof + '</span>';
+  showToast('回复已生成');
 }
 function copyCurrentReply() {
-  const tabs = ['englishReply','chineseReply','questionsList'];
-  for(const id of tabs) {
-    const el = document.getElementById(id);
+  var tabs = ['englishReply','chineseReply','questionsList'];
+  for(var ci=0; ci<tabs.length; ci++) {
+    var el = document.getElementById(tabs[ci]);
     if(el && el.style.display !== 'none') {
-      navigator.clipboard.writeText(el.value).then(()=>showToast('宸插鍒?)).catch(()=>{});
+      navigator.clipboard.writeText(el.value).then(function(){showToast('已复制');}).catch(function(){});
       return;
     }
   }
 }
 function copyAll() {
-  const e=document.getElementById('englishReply').value;
-  const c=document.getElementById('chineseReply').value;
-  const q=document.getElementById('questionsList').value;
-  navigator.clipboard.writeText(`=== ENGLISH REPLY ===\n${e}\n\n=== 涓枃鍐呴儴澶囨敞 ===\n${c}\n\n=== 寰呯‘璁ら棶棰?===\n${q}`).then(()=>showToast('宸插鍒跺叏閮?)).catch(()=>{});
+  var e=document.getElementById('englishReply').value;
+  var c=document.getElementById('chineseReply').value;
+  var q=document.getElementById('questionsList').value;
+  navigator.clipboard.writeText('=== ENGLISH REPLY ===\n'+e+'\n\n=== 中文内部备注 ===\n'+c+'\n\n=== 待确认问题 ===\n'+q).then(function(){showToast('已复制全部');}).catch(function(){});
 }
 function resetAll() {
-  PARAM_IDS.forEach(id => { const el = document.getElementById(id); if(el) el.value=''; });
+  PARAM_IDS.forEach(function(id){ var el = document.getElementById(id); if(el) el.value=''; });
   document.getElementById('inquiryText').value = '';
   document.getElementById('emptyState').style.display = 'block';
   document.getElementById('outputSection').classList.remove('visible');
   document.getElementById('quickInfo').innerHTML = '';
   updateProgress();
-  showToast('宸查噸缃?);
+  showToast('已重置');
 }
 function clearInquiry() { document.getElementById('inquiryText').value = ''; }
-let toastTimer;
+var toastTimer;
 function showToast(msg) {
-  const t=document.getElementById('toast');
+  var t=document.getElementById('toast');
   t.textContent=msg; t.classList.add('show');
   clearTimeout(toastTimer);
-  toastTimer=setTimeout(()=>t.classList.remove('show'),2000);
+  toastTimer=setTimeout(function(){t.classList.remove('show');},2000);
 }
 updateProgress();
 </script>
 </body>
 </html>
-
